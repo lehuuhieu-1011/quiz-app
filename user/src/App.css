@@ -1,0 +1,15 @@
+.site-card-wrapper {
+  padding: 30px;
+  background: #ececec;
+}
+.button {
+  margin: 16px 24px 16px 0;
+  float: right;
+}
+.spin {
+  margin: 20px 0;
+  margin-bottom: 20px;
+  padding: 30px 50px;
+  text-align: center;
+  border-radius: 4px;
+}
