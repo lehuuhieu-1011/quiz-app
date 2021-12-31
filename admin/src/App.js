@@ -13,14 +13,16 @@ function App() {
   return (
     <div>
       <LayoutHeader />
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/" element={<ManageCourse />} />
-        <Route path="/manageCourse" element={<ManageCourse />} />
-        <Route path="/manageQuestion/:idCourse" element={<ManageQuestion />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+      <div style={{ paddingBottom: 100, paddingTop: 100 }}>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<ManageCourse />} />
+          <Route path="/manageCourse" element={<ManageCourse />} />
+          <Route path="/manageQuestion/:idCourse" element={<ManageQuestion />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </div>
       <LayoutFooter />
     </div>
   )

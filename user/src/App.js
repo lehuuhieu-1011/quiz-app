@@ -1,4 +1,4 @@
-import 'antd/dist/antd.css'
+import 'antd/dist/antd.min.css'
 import { Route, Routes } from 'react-router-dom'
 import './App.css'
 import Home from './pages/Home'

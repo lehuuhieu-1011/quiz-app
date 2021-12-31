@@ -1,15 +1,15 @@
 const axios = require('axios')
 
-export function HandleImage(file) {
+export async function HandleImage(file) {
     console.log(file)
     const api = 'https://upload-image-123.azurewebsites.net/'
-    const { url } = axios(api)
+    const { url } = await axios(api)
         .then((res) => res.data)
         .catch(error => console.log(error))
 
     console.log(url)
 
-    axios({
+    await axios({
         method: 'put',
         url,
         headers: {
