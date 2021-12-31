@@ -144,10 +144,10 @@ function ManageQuestion() {
         });
     };
 
-    const onFinish = (value) => {
+    const onFinish = async (value) => {
         setLoadingSubmit(true);
         if (imageFile) {
-            value.image = HandleImage(imageFile);
+            value.image = await HandleImage(imageFile);
         } else {
             value.image = document.getElementById('oldImage')?.src;
         }
