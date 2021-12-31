@@ -8,7 +8,8 @@ import { useNavigate } from 'react-router-dom';
 import { HandleImage } from '../Helper/HandleImage';
 import HandleLogout from '../Helper/HandleLogout';
 import { OpenNotification } from '../Helper/HandleNotify';
-import { CheckRoleToken, CheckToken } from '../Helper/HandleToken';
+import { CheckRoleToken } from '../Helper/HandleToken';
+import { useStore } from '../store';
 
 const { Title } = Typography;
 
@@ -31,20 +32,19 @@ function ManageQuestion() {
 
     const token = localStorage.getItem('token');
 
-    const checkToken = CheckToken();
-    const checkRoleToken = CheckRoleToken('Admin');
+    const [state, dispatch] = useStore();
 
     useEffect(() => {
-        if (!checkToken) {
+        if (!state.login) {
             OpenNotification('Login', 'error', 'Please Login');
             HandleLogout();
         } else {
-            if (!checkRoleToken) {
+            if (!CheckRoleToken('Admin')) {
                 OpenNotification('Permission', 'error', 'Your account dont have permission');
-                navigate('/');
+                HandleLogout();
             }
         }
-    }, [checkRoleToken, checkToken, navigate]);
+    }, [state.login, navigate]);
 
     useEffect(() => {
         const apiGetCourse = `https://localhost:5001/api/CourseQuiz/${idCourse}`;

@@ -6,7 +6,8 @@ import { useNavigate } from 'react-router';
 import { HandleImage } from '../Helper/HandleImage';
 import HandleLogout from '../Helper/HandleLogout';
 import { OpenNotification } from '../Helper/HandleNotify';
-import { CheckRoleToken, CheckToken } from '../Helper/HandleToken';
+import { CheckRoleToken } from '../Helper/HandleToken';
+import { useStore } from '../store';
 
 const { Title } = Typography;
 
@@ -25,20 +26,19 @@ function ManageCourse() {
 
     const navigate = useNavigate();
 
-    // const checkToken = CheckToken();
-    // const checkRoleToken = CheckRoleToken('Admin');
+    const [state, dispatch] = useStore();
 
-    // useEffect(() => {
-    //     if (!checkToken) {
-    //         OpenNotification('Login', 'error', 'Please Login');
-    //         HandleLogout();
-    //     } else {
-    //         if (!checkRoleToken) {
-    //             OpenNotification('Permission', 'error', 'Your account dont have permission');
-    //             navigate('/');
-    //         }
-    //     }
-    // }, [checkRoleToken, checkToken, navigate]);
+    useEffect(() => {
+        if (!state.login) {
+            OpenNotification('Login', 'error', 'Please Login');
+            HandleLogout();
+        } else {
+            if (!CheckRoleToken('Admin')) {
+                OpenNotification('Permission', 'error', 'Your account dont have permission');
+                HandleLogout();
+            }
+        }
+    }, [navigate, state.login]);
 
     useEffect(() => {
         const apiUrl = 'https://localhost:5001/api/CourseQuiz';

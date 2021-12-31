@@ -1,6 +1,6 @@
 function HandleLogout() {
     localStorage.clear()
-    window.location.replace('/')
+    window.location.assign('/login')
 }
 
 export default HandleLogout

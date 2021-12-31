@@ -6,6 +6,7 @@ import LayoutHeader from './components/Header'
 import Login from './pages/Login'
 import ManageCourse from './pages/ManageCourse'
 import ManageQuestion from './pages/ManageQuestion'
+import NotFound from './pages/NotFound'
 import Register from './pages/Register'
 
 function App() {
@@ -13,11 +14,12 @@ function App() {
     <div>
       <LayoutHeader />
       <Routes>
-        <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/" element={<ManageCourse />} />
         <Route path="/manageCourse" element={<ManageCourse />} />
         <Route path="/manageQuestion/:idCourse" element={<ManageQuestion />} />
         <Route path="/register" element={<Register />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <LayoutFooter />
     </div>

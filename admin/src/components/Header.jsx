@@ -3,30 +3,31 @@ import { Header } from 'antd/lib/layout/layout';
 import jwtDecode from 'jwt-decode';
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import HandleLogout from '../Helper/HandleLogout';
 import { OpenNotification } from '../Helper/HandleNotify';
+import { actions, useStore } from '../store';
 
 function LayoutHeader() {
     const token = localStorage.getItem('token');
 
-    const [login, setLogin] = useState(false);
     const [role, setRole] = useState('');
 
     const navigate = useNavigate();
+    const [state, dispatch] = useStore();
+    const { login } = state;
 
     useEffect(() => {
         if (token === null) {
             return;
         }
         const decoded = jwtDecode(token);
-        setLogin(decoded.exp < Date.now());
         setRole(decoded.Role);
     }, [token]);
 
     const logoutOnClick = () => {
-        localStorage.clear();
-        setLogin(false);
+        HandleLogout();
+        dispatch(actions.setLogin(false));
         OpenNotification('Logout', 'success', 'Logout successfully');
-        navigate('/');
     };
 
     return (
@@ -53,7 +54,13 @@ function LayoutHeader() {
                                 UserName: {localStorage.getItem('username')}
                             </Button>
                             <Link to="manageCourse">
-                                <Button className="button" type="default" onClick={() => {}}>
+                                <Button
+                                    className="button"
+                                    type="default"
+                                    onClick={() => {
+                                        navigate('/manageCourse');
+                                    }}
+                                >
                                     Manage Course
                                 </Button>
                             </Link>

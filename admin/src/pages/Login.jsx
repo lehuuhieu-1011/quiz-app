@@ -1,18 +1,24 @@
 import { Button, Card, Col, Form, Input, Row, Typography } from 'antd';
 import { useForm } from 'antd/lib/form/Form';
 import axios from 'axios';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { OpenNotification } from '../Helper/HandleNotify';
+import { actions, useStore } from '../store';
 
 const { Title } = Typography;
 
 function Login() {
     const [loadingButton, setLoadingButton] = useState(false);
 
+    const [form] = useForm();
     const navigate = useNavigate();
 
-    const [form] = useForm();
+    const [state, dispatch] = useStore();
+
+    useEffect(() => {
+        state.login && navigate('/manageCourse');
+    }, [navigate, state.login]);
 
     const onLoginFinish = async (values) => {
         setLoadingButton(true);
@@ -24,6 +30,8 @@ function Login() {
             });
             localStorage.setItem('token', response.data.token);
             localStorage.setItem('username', values.username);
+            dispatch(actions.setLogin(true));
+
             OpenNotification('Login', 'success', `Login successfully with username: ${values.username}`);
             navigate('/manageCourse');
             form.resetFields();
