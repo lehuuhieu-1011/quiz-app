@@ -3,7 +3,6 @@ import { Footer } from 'antd/lib/layout/layout';
 function Waiting() {
     document.body.style.background = 'url("https://images-cdn.kahoot.it/acf73135-050e-4126-b172-d0dbb436012e")';
     document.body.style.backgroundSize = 'cover';
-    document.body.style.marginBottom = '50px';
     return (
         <>
             <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', paddingTop: '20%' }}>

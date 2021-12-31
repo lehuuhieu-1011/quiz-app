@@ -25,29 +25,26 @@ function ManageCourse() {
 
     const navigate = useNavigate();
 
-    const checkToken = CheckToken();
-    const checkRoleToken = CheckRoleToken('Admin');
+    // const checkToken = CheckToken();
+    // const checkRoleToken = CheckRoleToken('Admin');
 
-    useEffect(() => {
-        if (!checkToken) {
-            OpenNotification('Login', 'error', 'Please Login');
-            HandleLogout();
-        } else {
-            if (!checkRoleToken) {
-                OpenNotification('Permission', 'error', 'Your account dont have permission');
-                navigate('/');
-            }
-        }
-    }, [checkRoleToken, checkToken, navigate]);
+    // useEffect(() => {
+    //     if (!checkToken) {
+    //         OpenNotification('Login', 'error', 'Please Login');
+    //         HandleLogout();
+    //     } else {
+    //         if (!checkRoleToken) {
+    //             OpenNotification('Permission', 'error', 'Your account dont have permission');
+    //             navigate('/');
+    //         }
+    //     }
+    // }, [checkRoleToken, checkToken, navigate]);
 
     useEffect(() => {
         const apiUrl = 'https://localhost:5001/api/CourseQuiz';
         axios({
             method: 'GET',
             url: apiUrl,
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
         })
             .then((res) => {
                 setCourse(res.data);

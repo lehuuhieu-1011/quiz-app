@@ -3,8 +3,8 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function Home() {
-    document.body.style.height = '100%';
-    document.body.style.backgroundColor = 'purple';
+    document.body.style.background = 'url("https://images-cdn.kahoot.it/acf73135-050e-4126-b172-d0dbb436012e")';
+    document.body.style.backgroundSize = 'cover';
 
     const navigate = useNavigate();
 
