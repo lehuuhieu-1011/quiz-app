@@ -51,7 +51,7 @@ function Login() {
     };
 
     return (
-        <div style={{ paddingTop: 150 }}>
+        <div>
             <Row style={{ display: 'flex' }} align="middle" justify="center">
                 <Col span={6}>
                     <Card>

@@ -99,6 +99,15 @@ function ManageCourse() {
                     >
                         DETAIL
                     </Tag>
+                    <Tag
+                        color="yellow"
+                        style={{ cursor: 'pointer' }}
+                        onClick={() => {
+                            navigate(`/manageQuestion/${value.key}`);
+                        }}
+                    >
+                        START
+                    </Tag>
                 </Space>
             ),
         },

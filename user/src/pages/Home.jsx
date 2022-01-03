@@ -1,58 +1,47 @@
-import { Button, Form, Input, List } from 'antd';
+import { Button, Form, Input } from 'antd';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
-function Home() {
+function Home({ submitData }) {
     document.body.style.background = 'url("https://images-cdn.kahoot.it/acf73135-050e-4126-b172-d0dbb436012e")';
     document.body.style.backgroundSize = 'cover';
 
-    const navigate = useNavigate();
-
-    const [loading, setLoading] = useState(false);
-
-    const onFinishPin = (values) => {
-        console.log('Success:', values);
-        setLoading(true);
-    };
-
-    const onFinishFailed = (errorInfo) => {
-        console.log('Failed:', errorInfo);
-    };
-
-    const onFinishName = (value) => {
-        console.log(value);
-        navigate('/question');
-    };
-
-    const loadMore = loading && (
-        <Form name="basic" initialValues={{ remember: true }} onFinish={onFinishName} onFinishFailed={onFinishFailed} autoComplete="off">
-            <Form.Item>
-                <Input placeholder="Nick Name" />
-            </Form.Item>
-
-            <Form.Item>
-                <Button type="primary" htmlType="submit" style={{ width: '100%' }}>
-                    Okay, Go!
-                </Button>
-            </Form.Item>
-        </Form>
-    );
+    const [next, setNext] = useState(false);
+    const [username, setUsername] = useState('');
+    const [roomId, setRoomId] = useState('');
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', paddingTop: '20%' }}>
-            <List loadMore={loadMore}>
-                <Form name="basic" initialValues={{ remember: true }} onFinish={onFinishPin} onFinishFailed={onFinishFailed} autoComplete="off">
+            {!next ? (
+                <Form name="basic">
                     <Form.Item>
-                        <Input placeholder="GAME PIN" />
+                        <Input placeholder="ROOM ID ..." value={roomId} onChange={(e) => setRoomId(e.target.value)} />
                     </Form.Item>
 
                     <Form.Item>
-                        <Button type="primary" htmlType="submit" style={{ width: '100%' }}>
+                        <Button type="primary" style={{ width: '100%' }} onClick={() => setNext(true)}>
                             Submit
                         </Button>
                     </Form.Item>
                 </Form>
-            </List>
+            ) : (
+                <Form name="basic">
+                    <Form.Item>
+                        <Input placeholder="UserName ..." value={username} onChange={(e) => setUsername(e.target.value)} />
+                    </Form.Item>
+
+                    <Form.Item>
+                        <Button
+                            type="primary"
+                            style={{ width: '100%' }}
+                            onClick={() => {
+                                submitData(username, roomId);
+                            }}
+                        >
+                            Okay, Go!
+                        </Button>
+                    </Form.Item>
+                </Form>
+            )}
         </div>
     );
 }

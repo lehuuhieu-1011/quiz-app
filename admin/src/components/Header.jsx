@@ -25,7 +25,9 @@ function LayoutHeader() {
     }, [token]);
 
     const logoutOnClick = () => {
-        HandleLogout();
+        // HandleLogout();
+        window.localStorage.clear();
+        navigate('/login');
         dispatch(actions.setLogin(false));
         OpenNotification('Logout', 'success', 'Logout successfully');
     };
