@@ -1,7 +1,7 @@
 import { Button, Card, Col, Form, Input, Row, Typography } from 'antd';
 import { useForm } from 'antd/lib/form/Form';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { OpenNotification } from '../Helper/HandleNotify';
 import { actions, useStore } from '../store';
@@ -10,6 +10,7 @@ const { Title } = Typography;
 
 function Login() {
     const [loadingButton, setLoadingButton] = useState(false);
+    const componentMounted = useRef(true);
 
     const [form] = useForm();
     const navigate = useNavigate();
@@ -18,7 +19,11 @@ function Login() {
 
     useEffect(() => {
         state.login && navigate('/manageCourse');
-    }, [navigate, state.login]);
+
+        return () => {
+            componentMounted.current = false;
+        };
+    }, [state.login, navigate]);
 
     const onLoginFinish = async (values) => {
         setLoadingButton(true);
@@ -33,6 +38,7 @@ function Login() {
             dispatch(actions.setLogin(true));
 
             OpenNotification('Login', 'success', `Login successfully with username: ${values.username}`);
+            setLoadingButton(false);
             navigate('/manageCourse');
             form.resetFields();
         } catch (error) {
@@ -42,8 +48,8 @@ function Login() {
             } else {
                 OpenNotification('Login', 'error', 'Internal Server Error');
             }
+            setLoadingButton(false);
         }
-        setLoadingButton(false);
     };
 
     const onLoginFinishFailed = (errorInfo) => {
@@ -53,7 +59,7 @@ function Login() {
     return (
         <div>
             <Row style={{ display: 'flex' }} align="middle" justify="center">
-                <Col span={6}>
+                <Col xxl={6} xl={8} lg={10} md={12} sm={16}>
                     <Card>
                         <Title style={{ textAlign: 'center' }}>Login</Title>
                         <Form

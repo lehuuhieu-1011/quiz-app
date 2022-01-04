@@ -13,22 +13,22 @@ function Home({ submitData }) {
         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', paddingTop: '20%' }}>
             {!next ? (
                 <Form name="basic">
+                    <h1 style={{ textAlign: 'center' }}>Enter Room ID</h1>
                     <Form.Item>
                         <Input placeholder="ROOM ID ..." value={roomId} onChange={(e) => setRoomId(e.target.value)} />
                     </Form.Item>
-
                     <Form.Item>
-                        <Button type="primary" style={{ width: '100%' }} onClick={() => setNext(true)}>
-                            Submit
+                        <Button type="primary" style={{ width: '100%' }} onClick={() => setNext(true)} htmlType="submit">
+                            Enter
                         </Button>
                     </Form.Item>
                 </Form>
             ) : (
                 <Form name="basic">
+                    <h1 style={{ textAlign: 'center' }}>Enter UserName</h1>
                     <Form.Item>
                         <Input placeholder="UserName ..." value={username} onChange={(e) => setUsername(e.target.value)} />
                     </Form.Item>
-
                     <Form.Item>
                         <Button
                             type="primary"
@@ -36,6 +36,7 @@ function Home({ submitData }) {
                             onClick={() => {
                                 submitData(username, roomId);
                             }}
+                            htmlType="submit"
                         >
                             Okay, Go!
                         </Button>

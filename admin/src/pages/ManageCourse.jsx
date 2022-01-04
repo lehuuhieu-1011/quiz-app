@@ -103,7 +103,8 @@ function ManageCourse() {
                         color="yellow"
                         style={{ cursor: 'pointer' }}
                         onClick={() => {
-                            navigate(`/manageQuestion/${value.key}`);
+                            localStorage.setItem('RoomId', Math.floor(100000 + Math.random() * 900000));
+                            navigate('/waiting');
                         }}
                     >
                         START

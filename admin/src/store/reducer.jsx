@@ -6,7 +6,6 @@ const initState = {
 };
 
 function reducer(state, action) {
-    console.log(state);
     switch (action.type) {
         case LOGIN:
             return {
