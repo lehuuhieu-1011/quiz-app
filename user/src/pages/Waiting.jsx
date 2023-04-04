@@ -1,9 +1,6 @@
 import { Footer } from 'antd/lib/layout/layout';
 
-function Waiting({ username, roomId }) {
-    document.body.style.background = 'url("https://images-cdn.kahoot.it/acf73135-050e-4126-b172-d0dbb436012e")';
-    document.body.style.backgroundSize = 'cover';
-
+function Waiting({ username }) {
     return (
         <>
             <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', paddingTop: '20%' }}>
